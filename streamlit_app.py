@@ -43,3 +43,8 @@ if ingredients_list:
             st.success('Your Smoothie is ordered!', icon="✅")
         except Exception as e:
             st.error(f"An error occurred: {e}")
+
+# New section to display fruityvice nutrition information
+import requests
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+st.text(fruityvice_response)
