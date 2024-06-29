@@ -28,6 +28,12 @@ if ingredients_list:
     ingredients_string = ' '.join(ingredients_list)
     st.write(ingredients_string)
 
+    for fruit_chosen in ingredients_list:
+        ingredients_string += fruit_chosen + ' ' 
+        st.subheader(fruit_chosen + 'Nutrition Information')
+        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon" + fruit_chosen)
+        fv_df = st.dataframe(data = fruityvice_response.json())
+    
     # SQL insert statement with parameter placeholders
     my_insert_stmt = """
     INSERT INTO smoothies.public.orders (ingredients, name_on_order)
@@ -45,6 +51,4 @@ if ingredients_list:
         except Exception as e:
             st.error(f"An error occurred: {e}")
 
-st.subheader(fruit_chosen + 'Nutrition Information')
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon" + fruit_chosen)
-fv_df = st.dataframe(data = fruityvice_response.json())
+
